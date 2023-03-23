@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+#A bash script that lopps from one to ten
+#Displays Bad Luck on the fourth iteration
+#Displays good luck for the eighth iteration
+#Displays Best School for the remaining iteration
+
+count=0
+
+while [ $count -lt 10 ]
+do
+	if [ $count -eq 4 ]
+	then
+		echo "bad luck"
+	elif [ $count -eq 8 ]
+	then
+		echo "good luck"
+	else
+	echo "Best School"
+fi
+((count++))
+done

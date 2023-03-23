@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#A bash script thay displays the contenys of the current directory
+#  In a list formart
+#  And only the part after the dash is displayed
+
+file=$(ls)
+for i in $file
+do
+echo "$i" | cut -d "-" -f2
+done

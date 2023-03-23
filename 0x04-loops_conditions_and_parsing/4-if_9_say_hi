@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+#A bash script that prints Best School ten times but print hi on a new line on the 9th iteration
+
+count=0
+
+while [ $count -lt 10 ]
+do
+if [ $count -eq 9 ]
+then
+echo "Hi"
+echo "Best School"
+else
+echo "Best School"
+fi
+((count++))
+done
