@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# Define variables
+hosts_tmp="$HOME/hosts.new"
+hosts_modifications=$(cat <<-END
+# host modifications
+127.0.0.2 localhost
+8.8.8.8 facebook.com
+END
+)
+
+# Copy the contents of /etc/hosts to a temporary file
+cp /etc/hosts "$hosts_tmp"
+
+# Remove any existing IPv4 addresses for localhost and facebook
+sed -i -E '/^([0-9]{1,3}\.){3}[0-9]{1,3}\s(localhost|facebook)$/d' "$hosts_tmp"
+
+# Add the modified hosts entries to the temporary file
+echo -e "$hosts_modifications" >> "$hosts_tmp"
+
+# Overwrite /etc/hosts with the updated file
+sudo cp -f "$hosts_tmp" /etc/hosts
