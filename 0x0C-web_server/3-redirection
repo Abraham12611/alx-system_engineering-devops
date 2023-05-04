@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Install nginx and and make it return a page with a string 'Holberton School'
+# Make sure that the '/redirect_me' url is a permanent redirect
+
+apt-get install -y nginx
+echo "Holberton School" > /var/www/html/index.nginx-debian.html
+
+line1="rewrite ^/redirect_me$ https://www.google.com permanent;"
+
+sed -i "53 i $line1" /etc/nginx/sites-available/default
+
+service nginx start

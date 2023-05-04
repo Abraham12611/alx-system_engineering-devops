@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Install nginx and and make it return a page with a string 'Holberton School'
+# Make sure that the '/redirect_me' url is a permanent redirect
+
+apt-get install -y nginx
+echo "Holberton School" > /var/www/html/index.nginx-debian.html
+
+line1="rewrite ^/redirect_me$ https://www.google.com permanent"
+line2="rewrite ^/redirect_me/$ https://www.google.com permanent"
+
+echo "Ceci n'est pas une page" >> /var/www/html/error_404.html
+sed -i '38i\error_page 404 /error_404.html;' /etc/nginx/sites-available/default
+service nginx start
