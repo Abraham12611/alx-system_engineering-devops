@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Define variables
+#Define variables
 hosts_tmp="$HOME/hosts.new"
 hosts_modifications=$(cat <<-END
 # host modifications
