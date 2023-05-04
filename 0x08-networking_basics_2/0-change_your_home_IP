@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
+# This script remaps IPV4 addresses to hostnames
 
-#Define variables
 hosts_tmp="$HOME/hosts.new"
 hosts_modifications=$(cat <<-END
 # host modifications
