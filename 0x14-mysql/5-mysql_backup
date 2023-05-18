@@ -1,4 +1,48 @@
 #!/usr/bin/env bash
 # Dumps and archives all MySQL databases
+
 mysqldump --all-databases -u root --password="$1" > backup.sql
-tar -cvzf "$(date '+%d-%m-%Y.tar.gz')" backup.sql
+
+# Check if mysqldump was successful
+if [ $? -eq 0 ]; then
+  echo "MySQL dump completed successfully."
+else
+  echo "MySQL dump failed. Exiting."
+  exit 1
+fi
+
+# Compress the backup file
+gzip backup.sql
+
+# Check if compression was successful
+if [ $? -eq 0 ]; then
+  echo "Backup file compressed successfully."
+else
+  echo "Backup file compression failed. Exiting."
+  exit 1
+fi
+
+# Archive the compressed backup file
+tar -cvf "$(date '+%d-%m-%Y.tar')" backup.sql.gz
+
+# Check if archiving was successful
+if [ $? -eq 0 ]; then
+  echo "Backup file archived successfully."
+else
+  echo "Backup file archiving failed. Exiting."
+  exit 1
+fi
+
+# Remove the original backup file
+rm backup.sql
+
+# Check if removal was successful
+if [ $? -eq 0 ]; then
+  echo "Original backup file removed successfully."
+else
+  echo "Original backup file removal failed. Exiting."
+  exit 1
+fi
+
+echo "Backup process completed successfully."
+
